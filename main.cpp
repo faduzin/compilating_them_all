@@ -84,7 +84,7 @@ int charType(char c)
         return 4;
 }
 
-int dfa(ifstream &file)
+int dfa(ifstream &file, ofstream &output)
 {
     string buffer;
     int char_type;
@@ -92,8 +92,8 @@ int dfa(ifstream &file)
 
     while(file.get(c))
     {
-        char_type = charType(c); // =2 //=0
-        dfa_state = state_matrix[dfa_state][char_type]; // m[0][2] ESTADO 3 // sm[3][0]
+        char_type = charType(c);
+        dfa_state = state_matrix[dfa_state][char_type];
 
         if(accept_state[dfa_state] == false)
         {
@@ -107,25 +107,33 @@ int dfa(ifstream &file)
                 buffer += c;
                 break;
             case 2:
-                cout << c;
+                //cout << c;
+                output << c;
                 break;
             case 3:
-                cout << c;
+                //cout << c;
+                output << c;
                 break;
             }
 
 
         } else{
-            //cout << "Buffer: " << buffer << "| ";
             switch(charType(previous_char))
             {
             case 0:
                 if(isReserved(buffer) == true)
-                {cout << buffer;}else
-                {cout << "ID";}
+                {
+                    //cout << buffer;
+                    output << buffer;
+                }else
+                {
+                    //cout << "ID";
+                    output << "ID";
+                }
                 break;
             case 1:
-                cout << buffer;
+                //cout << buffer;
+                output << buffer;
                 break;
             case 2:
                 //cout << c;
@@ -144,7 +152,8 @@ int dfa(ifstream &file)
 int main(void)
 {
     ifstream file("sort.txt");
-    dfa(file);
+    ofstream output("output.txt");
+    dfa(file, output);
 
     file.close();
 
