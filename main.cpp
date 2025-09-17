@@ -17,12 +17,6 @@ const int state_matrix[4][5] =
     {4,4,3,4} //estado 3
 };
 
-/*const bool advance_matrix[4][5] = {
-    {true,true,true, true},
-    {true,false,false, false},
-    {false,true,false, false},
-    {false, false, true, false}
-}; */
 
 const bool advance_matrix[5][6] =
 {
@@ -35,9 +29,9 @@ const bool advance_matrix[5][6] =
 
 
 const bool accept_state[5] = {false, false, false, false, true};
-
 int dfa_state = 0;
 char previous_char;
+
 /*
 int isReserved(string word)
 {
@@ -69,8 +63,7 @@ bool isReserved(string word)
     }
     return false;
 }
-/* programa para ordenação por seleção de
-   uma matriz com dez elementos. */
+
 
 int charType(char c)
 {
@@ -89,9 +82,6 @@ int charType(char c)
         return 3;
     else
         return 4;
-
-
-
 }
 
 int dfa(ifstream &file)
@@ -102,8 +92,8 @@ int dfa(ifstream &file)
 
     while(file.get(c))
     {
-        char_type = charType(c);
-        dfa_state = state_matrix[dfa_state][char_type];
+        char_type = charType(c); // =2 //=0
+        dfa_state = state_matrix[dfa_state][char_type]; // m[0][2] ESTADO 3 // sm[3][0]
 
         if(accept_state[dfa_state] == false)
         {
@@ -138,7 +128,7 @@ int dfa(ifstream &file)
                 cout << buffer;
                 break;
             case 2:
-                cout << c;
+                //cout << c;
                 break;
 
             }
@@ -148,85 +138,8 @@ int dfa(ifstream &file)
         }
 
     }
-/*
-
-        while(file.get(c))
-        {
-            char_type = charType(c);
-
-            switch(char_type)
-            {
-            case 0:
-                if(advance_matrix[dfa_state][char_type] == true)
-                {
-                    dfa_state = state_matrix[dfa_state][char_type];
-                    buffer+=c;
-                }
-                else
-                {
-                    dfa_state = 0;
-                    if(isReserved(buffer) == 1)
-                    {
-                        cout << buffer;
-                        buffer.clear();
-
-                    }
-                    else
-                    {
-                        cout << "ID ";
-                        buffer.clear();
-
-                    }
-
-                }
-                break;
-            case 1:
-                if(advance_matrix[dfa_state][char_type] == true)
-                {
-                    dfa_state = state_matrix[dfa_state][char_type];
-                    cout << c;
-                }
-                else
-                {
-                    dfa_state = 0;
-                }
-                break;
-            case 2:
-                if(advance_matrix[dfa_state][char_type] == true)
-                {
-                    dfa_state = state_matrix[dfa_state][char_type];
-                    cout << c;
-
-                }
-                else
-                {
-                    dfa_state = 0;
-                    cout << c;
-                }
-                break;
-            case 3:
-                dfa_state = 0;
-                cout << c;
-                break;
-
-
-
-            }
-
-
-
-        }
-    */
-
 
 }
-
-
-
-
-
-
-
 
 int main(void)
 {
