@@ -1,0 +1,7 @@
+int main(void) {
+    int i;
+    int a;
+    i = z;
+    int x;
+    i = minloc(a,i,high);
+}
